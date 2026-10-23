@@ -78,7 +78,7 @@ export const OPENINGS = [
         moves: "e4 e5 Nc3 Nf6 f4 d5 fxe5 Nxe4 Nf3 Be7 d4 O-O Bd3 f5 exf6 Bxf6 O-O Nxc3 bxc3" },
       { name: "Bishop to c4, ...Nc6", note: "A quiet setup. Keep f4 in your pocket for later.",
         moves: "e4 e5 Nc3 Nc6 Bc4 Nf6 d3 Na5 Nge2 Nxc4 dxc4 d6" },
-      { name: "Max Lange Trap", note: "If Black takes on e4 you get Qh5 with threats against f7 and e5.",
+      { name: "Bishop to c4, ...Nxe4", note: "If Black takes on e4 you get Qh5 with threats against f7 and e5.",
         moves: "e4 e5 Nc3 Nf6 Bc4 Nxe4 Qh5 Nd6 Bb3 Nc6 Nb5 g6 Qf3 f5" },
     ],
   },

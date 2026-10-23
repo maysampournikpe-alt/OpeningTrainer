@@ -8,7 +8,7 @@ const nav = user
 document.getElementById("header").outerHTML = `
 <header class="site"><div class="wrap">
   <a class="brand" href="/"><img src="/logo.svg" alt="">Rookery</a>
-  <nav><a href="/">Openings</a>${nav}</nav>
+  <nav><a class="hide-sm" href="/">Openings</a>${nav}</nav>
 </div></header>`;
 
 document.getElementById("footer").outerHTML = `

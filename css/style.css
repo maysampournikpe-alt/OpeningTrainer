@@ -11,7 +11,8 @@ header.site { border-bottom: 1px solid #ccc; }
 header.site .wrap { display: flex; align-items: center; gap: 16px; height: 56px; }
 header.site .brand { display: flex; align-items: center; gap: 8px; color: #111; text-decoration: none; font-weight: bold; font-size: 20px; }
 header.site .brand img { width: 28px; height: 28px; }
-header.site nav { margin-left: auto; display: flex; gap: 14px; align-items: center; font-size: 15px; }
+header.site nav { margin-left: auto; display: flex; gap: 14px; align-items: center; font-size: 15px; white-space: nowrap; }
+@media (max-width: 480px) { header.site nav { gap: 10px; } header.site nav .hide-sm { display: none; } header.site .btn { padding: 4px 8px; } }
 
 footer.site { border-top: 1px solid #ccc; margin-top: 48px; padding: 16px 0 32px; color: #666; font-size: 14px; }
 

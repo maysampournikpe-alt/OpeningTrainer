@@ -39,10 +39,11 @@ if (!line) {
   const controlsEl = document.getElementById("controls");
 
   let mode = "practice";
-  let game, ply, selected, hint, mistakes, finished, last, busy;
+  let game, ply, selected, hint, mistakes, hints, finished, last, busy;
+  let gen = 0; // bumped on every reset so a pending opponent reply from an old game is ignored
 
   function reset() {
-    game = new Chess(); ply = 0; selected = null; hint = []; mistakes = 0; finished = false; last = []; busy = false;
+    game = new Chess(); ply = 0; selected = null; hint = []; mistakes = 0; hints = 0; finished = false; last = []; busy = false; gen++;
     draw();
     if (mode === "practice") {
       if (mine === 1) setStatus("You play Black. White moves first...");
@@ -67,7 +68,9 @@ if (!line) {
     if (ply >= moves.length) return finish();
     if (ply % 2 !== mine) {
       busy = true;
+      const mine_gen = gen;
       setTimeout(() => {
+        if (mine_gen !== gen) return;
         playSan(moves[ply]);
         busy = false;
         draw();
@@ -81,7 +84,7 @@ if (!line) {
     finished = true;
     const saved = markLineDone(o.id, li, mistakes);
     setStatus(
-      `Line complete${mistakes ? ` with ${mistakes} mistake${mistakes > 1 ? "s" : ""}` : " with no mistakes"}.` +
+      `Line complete${mistakes ? ` with ${mistakes} mistake${mistakes > 1 ? "s" : ""}` : " with no mistakes"}${hints ? `, ${hints} hint${hints > 1 ? "s" : ""} used` : ""}.` +
       (saved ? " Saved to your progress." : " Sign in to save your progress."), "good");
     draw();
   }
@@ -119,6 +122,7 @@ if (!line) {
     if (mode !== "practice" || finished || busy || ply % 2 !== mine) return;
     const probe = new Chess(game.fen());
     const m = probe.move(moves[ply]);
+    if (hint.length === 0) hints++;
     hint = hint.length === 0 ? [m.from] : [m.from, m.to];
     setStatus(hint.length === 1 ? "That piece moves. Press Hint again to see where." : `The move is ${moves[ply]}.`);
     draw();
