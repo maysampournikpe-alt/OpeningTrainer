@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sign up - Rookery</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div id="header"></div>
+<main class="wrap">
+<h1>Sign up</h1>
+<p class="sub">Make an account to keep track of the lines you have learned.</p>
+<form class="auth" id="f">
+  <label for="name">Username</label>
+  <input type="text" id="name" autocomplete="username" required>
+  <label for="email">Email</label>
+  <input type="email" id="email" autocomplete="email" required>
+  <label for="pw">Password (8+ characters)</label>
+  <input type="password" id="pw" autocomplete="new-password" required>
+  <button class="primary" type="submit">Create account</button>
+  <div class="err" id="err"></div>
+</form>
+<p class="note">Already have an account? <a href="/signin.html">Sign in</a>.<br>
+Accounts are saved in this browser only, so progress will not follow you to another device.</p>
+</main>
+<div id="footer"></div>
+<script type="module" src="/js/layout.js"></script>
+<script type="module" src="/js/signup.js"></script>
+</body>
+</html>
