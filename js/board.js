@@ -20,7 +20,7 @@ export function renderBoard(el, fen, opts = {}) {
     for (const f of files) {
       const sq = f + r;
       const d = document.createElement("div");
-      const light = (f.charCodeAt(0) - 97 + r) % 2 === 1;
+      const light = (f.charCodeAt(0) - 97 + r) % 2 === 0;
       d.className = "sq " + (light ? "l" : "d");
       d.dataset.sq = sq;
       if (last.includes(sq)) d.classList.add("last");
