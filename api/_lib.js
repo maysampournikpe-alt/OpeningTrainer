@@ -42,6 +42,8 @@ export async function writeJSON(key, data, { create = false, ifMatch } = {}) {
       });
     } catch (e) {
       if (e instanceof BlobPreconditionFailedError || /already exists/i.test(e.message)) throw new Conflict();
+      // don't rely on the wording of the error: if we were creating and the blob is there, it's a conflict
+      if (create && await readJSON(key).catch(() => null)) throw new Conflict();
       throw e;
     }
     return;
@@ -115,7 +117,5 @@ export function method(req, res, allowed) {
 
 export function fail(res, e) {
   console.error(e);
-  // TEMPORARY: include the error class/message while we debug sign-up on the live site
-  const detail = `${e && e.name}: ${String(e && e.message).slice(0, 200)}`;
-  res.status(500).json({ error: `Something went wrong on our side. Please try again. (${detail})` });
+  res.status(500).json({ error: "Something went wrong on our side. Please try again." });
 }
