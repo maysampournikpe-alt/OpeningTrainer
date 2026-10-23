@@ -115,5 +115,7 @@ export function method(req, res, allowed) {
 
 export function fail(res, e) {
   console.error(e);
-  res.status(500).json({ error: "Something went wrong on our side. Please try again." });
+  // TEMPORARY: include the error class/message while we debug sign-up on the live site
+  const detail = `${e && e.name}: ${String(e && e.message).slice(0, 200)}`;
+  res.status(500).json({ error: `Something went wrong on our side. Please try again. (${detail})` });
 }
