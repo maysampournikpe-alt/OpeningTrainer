@@ -14,6 +14,6 @@ document.getElementById("header").outerHTML = `
 document.getElementById("footer").outerHTML = `
 <footer class="site"><div class="wrap">Rookery: learn your chess openings, one line at a time.</div></footer>`;
 
-document.getElementById("out")?.addEventListener("click", e => { e.preventDefault(); signOut(); location.href = "/"; });
+document.getElementById("out")?.addEventListener("click", async e => { e.preventDefault(); await signOut(); location.href = "/"; });
 
 function esc(s) { return s.replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c])); }

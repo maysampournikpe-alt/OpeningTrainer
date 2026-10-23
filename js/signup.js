@@ -9,11 +9,14 @@ f.addEventListener("submit", async e => {
   err.textContent = "";
   const email = document.getElementById("email").value;
   const pw = document.getElementById("pw").value;
+  const btn = f.querySelector("button[type=submit]");
+  btn.disabled = true;
   try {
     if (isSignup) await signUp(document.getElementById("name").value, email, pw);
     else await signIn(email, pw);
     location.href = "/";
   } catch (ex) {
     err.textContent = ex.message;
+    btn.disabled = false;
   }
 });

@@ -82,11 +82,15 @@ if (!line) {
 
   function finish() {
     finished = true;
-    const saved = markLineDone(o.id, li, mistakes);
-    setStatus(
-      `Line complete${mistakes ? ` with ${mistakes} mistake${mistakes > 1 ? "s" : ""}` : " with no mistakes"}${hints ? `, ${hints} hint${hints > 1 ? "s" : ""} used` : ""}.` +
-      (saved ? " Saved to your progress." : " Sign in to save your progress."), "good");
+    const result = `Line complete${mistakes ? ` with ${mistakes} mistake${mistakes > 1 ? "s" : ""}` : " with no mistakes"}${hints ? `, ${hints} hint${hints > 1 ? "s" : ""} used` : ""}.`;
     draw();
+    if (!currentUser()) return setStatus(result + " Sign in to save your progress.", "good");
+    setStatus(result + " Saving...", "good");
+    const g = gen;
+    markLineDone(o.id, li, mistakes).then(saved => {
+      if (g !== gen) return; // restarted in the meantime
+      setStatus(result + (saved ? " Saved to your account." : " Could not save to your account. Check your connection and try the line again."), saved ? "good" : "bad");
+    });
   }
 
   function onSquare(sq) {
